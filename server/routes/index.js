@@ -6,3 +6,5 @@ router.get("/", (req, res) => {
 });
 
 module.exports = router;
+
+server.listen(port, () => console.log(`Listening on port ${port}`));
