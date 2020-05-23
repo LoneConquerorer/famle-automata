@@ -16,7 +16,7 @@ export default class Board extends React.Component {
     const rowCount = this.props.rows,
       colCount = this.props.cols;
     return (
-      <div>
+      <div className="game-board">
         {[...new Array(rowCount)].map((x, rowIndex) => {
           return (
             <div className="board-row" key={rowIndex}>

@@ -72,7 +72,7 @@ export default class Game extends React.Component {
     }
     return (
       <div className="game">
-        <div className="game-board">
+        <div className="game-board-container">
           <Board
             squares={current.squares}
             onClick={i => this.handleClick(i)}
@@ -80,7 +80,7 @@ export default class Game extends React.Component {
             cols={this.state.cols}
           />
         </div>
-        <div className="game-info">
+        {/* <div className="game-info">
           <button onClick={() => changeTempo(this.state.socket)}>
             change tempo to 120
           </button>
@@ -89,7 +89,7 @@ export default class Game extends React.Component {
         </div>
         <p className="App-intro">
           This is the timer value: {this.state.timestamp}
-        </p>
+        </p> */}
       </div>
     );
   }
