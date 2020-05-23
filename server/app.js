@@ -1,24 +1,68 @@
 const express = require("express");
+const socketio = require("socket.io");
 const http = require("http");
-const socketIo = require("socket.io");
 
-const port = process.env.PORT || 4001;
-const index = require("./routes/index");
+const { addUser, removeUser, getUser } = require("./users.js");
+
+const PORT = process.env.PORT || 5000;
+
+const router = require("./router");
 
 const app = express();
-app.use(index);
-
 const server = http.createServer(app);
+const io = socketio(server);
 
-const io = socketIo(server);
+var tempo = 60;
+var time = 0;
 
-io.on("connection", client => {
-  client.on("subscribeToTimer", interval => {
-    console.log("client is subscribing to timer with interval ", interval);
+io.on("connection", socket => {
+  // player side sockets
+  socket.on("join", ({ name }, callback) => {
+    const { error, user } = addUser({ id: socket.id, name });
+    if (error) return callback(error);
+
+    // Tells user they have joined
+    socket.emit("message", {
+      user: "admin",
+      text: "You have joined the chat"
+    });
+
+    // Tells all other users that new user has joined
+    socket.broadcast.emit("message", {
+      user: "admin",
+      text: `${user.name} has joined`
+    });
+
+    callback();
+  });
+
+  socket.on("sendMessage", (message, callback) => {
+    const thisUser = getUser(socket.id);
+    io.emit("message", { user: thisUser.name, text: message });
+    callback();
+  });
+
+  // Game related sockets
+
+  socket.on("subscribeToTimer", () => {
     setInterval(() => {
-      client.emit("timer", new Date());
-    }, interval);
+      io.sockets.emit("timer", time++);
+    }, (60 / tempo) * 1000);
+  });
+
+  socket.on("tempoChange", t => {
+    console.log("client changed tempo to ", t);
+    tempo = t;
+    time = 0;
+  });
+
+  socket.on("disconnect", () => {
+    console.log("player disconnected");
+    const user = removeUser(socket.id);
+    if (user) {
+      io.emit("message", { user: "admin", text: `${user.name} has left` });
+    }
   });
 });
 
-server.listen(port, () => console.log(`Listening on port ${port}`));
+server.listen(PORT, () => console.log(`Listening on port ${PORT}`));

@@ -1,19 +1,30 @@
 import React from "react";
-import Board from "./Board.js.js";
+import Board from "./Board.js";
+import { subscribeToTimer, changeTempo } from "../../api/api.js";
+// import io from "socket.io-client";
 
 export default class Game extends React.Component {
   constructor(props) {
     super(props);
+
+    subscribeToTimer(this.props.socket, (err, timestamp) =>
+      this.setState({
+        timestamp
+      })
+    );
+
     this.state = {
       xIsNext: true,
       stepNumber: 0,
       rows: this.props.rows,
       cols: this.props.cols,
+      socket: this.props.socket,
       history: [
         {
           squares: Array(this.props.rows * this.props.cols).fill(null)
         }
-      ]
+      ],
+      timestamp: 0
     };
   }
 
@@ -69,10 +80,16 @@ export default class Game extends React.Component {
             cols={this.state.cols}
           />
         </div>
-        {/* <div className="game-info">
+        <div className="game-info">
+          <button onClick={() => changeTempo(this.state.socket)}>
+            change tempo to 120
+          </button>
           <div>{status}</div>
           <ol>{moves}</ol>
-        </div> */}
+        </div>
+        <p className="App-intro">
+          This is the timer value: {this.state.timestamp}
+        </p>
       </div>
     );
   }

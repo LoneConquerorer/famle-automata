@@ -2,9 +2,7 @@ const express = require("express");
 const router = express.Router();
 
 router.get("/", (req, res) => {
-  res.send({ response: "I am alive" }).status(200);
+  res.send("server is up and running");
 });
 
 module.exports = router;
-
-server.listen(port, () => console.log(`Listening on port ${port}`));

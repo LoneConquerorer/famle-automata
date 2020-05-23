@@ -1,0 +1,40 @@
+.form {
+  display: flex;
+  background: rgb(255, 255, 255);
+  border-radius: 10px;
+}
+
+.input {
+  border-left-width: 2px;
+  border: 0px;
+  /* background: #ffffff00; */
+  border-radius: 10px;
+  padding: 0px;
+  width: 80%;
+  font-size: 1.2em;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+  outline: none;
+}
+
+.sendButton {
+  border-radius: 10px;
+  color: #fff !important;
+  text-transform: uppercase;
+  text-decoration: none;
+  background: #2979ff;
+  padding: 20px;
+  display: inline-block;
+  border: none;
+  width: 20%;
+  align-content: center;
+}
+.sendButton:hover {
+  background: #1369fd;
+}
+.sendButton:active {
+  background: #005eff;
+}
