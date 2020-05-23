@@ -1,6 +1,6 @@
 import React from "react";
-import Board from "./Board.js";
-import { subscribeToTimer, changeTempo } from "../../api/api.js";
+import Board from "../Board/Board.js";
+import { subscribeToTimer, changeTempo } from "../../../api/api.js";
 // import io from "socket.io-client";
 
 export default class Game extends React.Component {

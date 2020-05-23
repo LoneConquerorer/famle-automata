@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import queryString from "query-string";
 import io from "socket.io-client";
 import "./Chat.css";
-import Game from "./Game.js";
+import Game from "./Game/Game.js";
 import Input from "../input/Input.js";
 import Messages from "../messages/Messages.js";
 

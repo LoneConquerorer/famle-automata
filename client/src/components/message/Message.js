@@ -15,7 +15,7 @@ const Message = ({ message: { user, text }, name }) => {
       <div className="nameBox">
         <p className="colorWhite">{trimmedName}:</p>
       </div>
-      <div className="messageBox backgroundBlue">
+      <div className="messageBox backgroundPurple">
         <p className="messageText colorWhite">{text}</p>
       </div>
     </div>

@@ -16,6 +16,7 @@ var tempo = 60;
 var time = 0;
 
 io.on("connection", socket => {
+  console.log("player connected");
   // player side sockets
   socket.on("join", ({ name }, callback) => {
     const { error, user } = addUser({ id: socket.id, name });
@@ -47,7 +48,7 @@ io.on("connection", socket => {
   socket.on("subscribeToTimer", () => {
     setInterval(() => {
       io.sockets.emit("timer", time++);
-    }, (60 / tempo) * 1000);
+    }, (60 / checkTempo()) * 1000);
   });
 
   socket.on("tempoChange", t => {
