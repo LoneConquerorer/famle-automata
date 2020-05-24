@@ -1,0 +1,28 @@
+$preview: rgba(0, 204, 255, 0.698);
+$cell: rgb(0, 204, 255);
+$note: rgba(255, 0, 0, 0.719);
+
+.preview {
+  background-color: $preview;
+}
+.cell {
+  background-color: $cell;
+}
+.note {
+  background-color: $note;
+}
+.preview.cell {
+  background-color: mix($preview, $cell);
+}
+
+.preview.note {
+  background-color: mix($preview, $note);
+}
+
+.cell.note {
+  background-color: mix($note, $cell);
+}
+
+.preview.cell.note {
+  background-color: mix(mix($note, $cell), $preview);
+}

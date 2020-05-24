@@ -6,7 +6,9 @@ export default class Board extends React.Component {
     return (
       <Square
         key={i}
-        value={this.props.squares[i]}
+        cell={this.props.cells[i]}
+        preview={this.props.preview[i]}
+        note={this.props.notes[i]}
         onClick={() => this.props.onClick(i)}
       />
     );
