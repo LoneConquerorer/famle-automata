@@ -11,7 +11,9 @@ const {
   pushPreview,
   currentBoard,
   updateCells,
-  addNoteLoc
+  addNoteLoc,
+  clearCells,
+  clearNotes
 } = require("./game.js");
 
 const PORT = process.env.PORT || 5000;
@@ -100,6 +102,16 @@ io.on("connection", socket => {
   socket.on("updateNotes", ({ loc, type }) => {
     addNoteLoc(loc, type);
     socket.broadcast.emit("notesUpdate", { loc, type });
+  });
+
+  socket.on("clearNotes", () => {
+    clearNotes();
+    io.emit("notesCleared");
+  });
+
+  socket.on("clearCells", () => {
+    clearCells();
+    io.emit("cellsCleared");
   });
 
   socket.on("disconnect", () => {

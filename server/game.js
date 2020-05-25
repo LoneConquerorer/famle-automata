@@ -130,9 +130,18 @@ const addNoteLoc = (loc, type) => {
   var temp = notes[row].slice();
   temp[col] = temp[col] === type ? 0 : type;
   notes[row] = temp;
-  console.log(loc, notes[row][col], type);
-  console.log(loc, notes[row][col - 1], type);
-  console.log(loc, notes[row][col + 1], type);
+  // console.log(loc, notes[row][col], type);
+  // console.log(loc, notes[row][col - 1], type);
+  // console.log(loc, notes[row][col + 1], type);
+};
+
+const clearNotes = () => {
+  notes = Array(rows).fill(Array(cols).fill(0));
+};
+
+const clearCells = () => {
+  temp = Array();
+  cells = Array(rows).fill(Array(cols).fill(0));
 };
 
 module.exports = {
@@ -142,5 +151,7 @@ module.exports = {
   pushPreview,
   currentBoard,
   updateCells,
-  addNoteLoc
+  addNoteLoc,
+  clearNotes,
+  clearCells
 };

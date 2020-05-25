@@ -42,3 +42,13 @@ export function cellsUpdate(socket, cb) {
 export function previewClose(socket, cb) {
   socket.on("previewClose", ({ arr }) => cb(arr));
 }
+
+// clears all notes
+export function notesCleared(socket, cb) {
+  socket.on("notesCleared", () => cb());
+}
+
+// clears all cells
+export function cellsCleared(socket, cb) {
+  socket.on("cellsCleared", () => cb());
+}

@@ -9,7 +9,9 @@ import {
   previewUpdate,
   notesUpdate,
   cellsUpdate,
-  previewClose
+  previewClose,
+  notesCleared,
+  cellsCleared
 } from "../../../api/api.js";
 
 export default class Game extends React.Component {
@@ -54,6 +56,18 @@ export default class Game extends React.Component {
         }
         this.setState({ preview: temp });
       }
+    });
+
+    notesCleared(this.props.socket, () => {
+      this.setState({
+        notes: Array(this.props.rows * this.props.cols).fill(0)
+      });
+    });
+
+    cellsCleared(this.props.socket, () => {
+      this.setState({
+        cells: Array(this.props.rows * this.props.cols).fill(0)
+      });
     });
 
     this.state = {

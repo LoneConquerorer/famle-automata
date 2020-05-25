@@ -66,6 +66,14 @@ const GamePage = ({ location }) => {
     socket.emit("previewPush");
   };
 
+  const clearNotes = () => {
+    socket.emit("clearNotes");
+  };
+
+  const clearCells = () => {
+    socket.emit("clearCells");
+  };
+
   return (
     <div className="outerContainer">
       <div className="left-container">
@@ -81,14 +89,6 @@ const GamePage = ({ location }) => {
           />
         </div>
         <div className="right-bottom-container">
-          <div>
-            <button
-              className="preview "
-              onClick={event => StartAudioContext(Tone.context)}
-            >
-              Start Sound
-            </button>
-          </div>
           <div className="tempo-text">Tempo</div>
           <div className="tempo-align">
             <Tempo tempo={tempo} setTempo={setTempo} sendTempo={sendTempo} />
@@ -151,6 +151,29 @@ const GamePage = ({ location }) => {
                 onClick={event => setClick(6)}
               >
                 Bass/Kick
+              </button>
+            </div>
+          </div>
+          <div className="settings-layer">
+            <div className="bottom-div-half"></div>
+            <div className="bottom-div-half">
+              <button
+                className="preview cell-button"
+                onClick={event => StartAudioContext(Tone.context)}
+              >
+                Start Sound
+              </button>
+              <button
+                className="clear-button  center-button"
+                onClick={event => clearCells()}
+              >
+                Clear Cells
+              </button>
+              <button
+                className="clear-button  push-button"
+                onClick={event => clearNotes()}
+              >
+                Clear Notes
               </button>
             </div>
           </div>

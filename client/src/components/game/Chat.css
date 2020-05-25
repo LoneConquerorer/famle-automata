@@ -162,6 +162,40 @@
   background-color: rgba(255, 0, 0, 0.698);
 }
 
+.settings-layer {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end !important ;
+  height: 100%;
+}
+.bottom-div-half {
+  display: flex;
+  flex-direction: row;
+  height: 50%;
+}
+.clear-button {
+  color: red !important;
+  padding: 5%;
+  background-color: rgba(255, 255, 255, 0.157);
+}
+.clear-button:hover {
+  background-color: rgba(255, 255, 255, 0.438);
+}
+.clear-button:active {
+  background-color: rgba(255, 255, 255, 0.226);
+}
+
+.center-button {
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: 3%;
+  display: inline-block;
+  border: none;
+  width: 50%;
+  align-content: center;
+  height: 100%;
+}
+
 @media (min-width: 320px) and (max-width: 480px) {
   .outerContainer {
     height: 100%;
