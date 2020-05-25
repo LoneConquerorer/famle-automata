@@ -10,13 +10,13 @@ export function initBoard(socket, cb) {
   socket.emit("boardInit", cb);
 }
 
-export function previewClick(socket, loc) {
-  socket.emit("previewClick", { loc });
+export function previewClick(socket, { loc, value }) {
+  socket.emit("previewClick", { loc, value });
 }
 
 // sends note updates
-export function updateNotes(socket, { loc, type }) {
-  socket.emit("updateNotes", { loc, type });
+export function updateNotes(socket, { loc, type, value }) {
+  socket.emit("updateNotes", { loc, type, value });
 }
 
 // gets preview updates
@@ -26,12 +26,12 @@ export function tempoUpdate(socket, cb) {
 
 // gets preview updates
 export function previewUpdate(socket, cb) {
-  socket.on("previewUpdate", ({ loc }) => cb(loc));
+  socket.on("previewUpdate", ({ loc, value }) => cb(loc, value));
 }
 
 // gets note updates
 export function notesUpdate(socket, cb) {
-  socket.on("notesUpdate", ({ loc, type }) => cb(loc, type));
+  socket.on("notesUpdate", ({ loc, type, value }) => cb(loc, type, value));
 }
 
 //gets cell updates

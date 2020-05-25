@@ -87,10 +87,10 @@ io.on("connection", socket => {
     io.emit("tempo", tempo);
   });
 
-  socket.on("previewClick", ({ loc }) => {
+  socket.on("previewClick", ({ loc, value }) => {
     console.log("preview " + loc);
-    addPreviewLoc(socket.id, loc);
-    socket.broadcast.emit("previewUpdate", { loc });
+    addPreviewLoc(socket.id, loc, value);
+    socket.broadcast.emit("previewUpdate", { loc, value });
   });
 
   // pushes the current preview
@@ -99,9 +99,9 @@ io.on("connection", socket => {
     pushPreview(socket.id);
   });
 
-  socket.on("updateNotes", ({ loc, type }) => {
-    addNoteLoc(loc, type);
-    socket.broadcast.emit("notesUpdate", { loc, type });
+  socket.on("updateNotes", ({ loc, type, value }) => {
+    addNoteLoc(loc, type, value);
+    socket.broadcast.emit("notesUpdate", { loc, type, value });
   });
 
   socket.on("clearNotes", () => {

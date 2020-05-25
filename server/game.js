@@ -9,7 +9,7 @@ var survive = new Set([2, 3]);
 
 // preview setup
 const addPreviewID = id => {
-  preview.set(id, Array(0));
+  preview.set(id, new Set());
   return;
 };
 
@@ -20,18 +20,29 @@ const removePreviewID = id => {
 };
 
 // adds a location to the temporary array
-const addPreviewLoc = (id, loc) => {
-  const arr = preview.get(id);
+const addPreviewLoc = (id, loc, value) => {
+  var arr = new Set(preview.get(id));
+
+  if (value) {
+    if (!arr.has(loc)) {
+      arr.add(loc);
+    }
+  } else {
+    if (arr.has(loc)) {
+      arr.delete(loc);
+    }
+  }
+
   if (arr) {
-    preview.set(id, arr.concat(loc));
+    preview.set(id, arr);
   }
 };
 
 // pushes a player's preview to a temporary array
 const pushPreview = id => {
   const arr = preview.get(id);
-  temp = temp.concat(arr);
-  preview.set(id, Array());
+  temp = temp.concat([...arr]);
+  preview.set(id, new Set());
 };
 
 // returns the current board. Used for initial update.
@@ -124,15 +135,18 @@ const updateCells = () => {
 };
 
 // notes
-const addNoteLoc = (loc, type) => {
+const addNoteLoc = (loc, type, value) => {
   const row = Math.floor(loc / cols);
   const col = loc % cols;
   var temp = notes[row].slice();
-  temp[col] = temp[col] === type ? 0 : type;
+
+  if (temp[col] === type) {
+    temp[col] = value;
+  } else {
+    temp[col] = value ? value : temp[col];
+  }
+
   notes[row] = temp;
-  // console.log(loc, notes[row][col], type);
-  // console.log(loc, notes[row][col - 1], type);
-  // console.log(loc, notes[row][col + 1], type);
 };
 
 const clearNotes = () => {

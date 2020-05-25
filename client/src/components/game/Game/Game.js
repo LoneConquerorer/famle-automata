@@ -28,15 +28,20 @@ export default class Game extends React.Component {
       Tone.Transport.bpm.value = t;
     });
 
-    previewUpdate(this.props.socket, loc => {
+    previewUpdate(this.props.socket, (loc, value) => {
       let temp = this.state.preview.slice();
-      temp[loc] = temp[loc] === 1 ? 0 : 1;
+      temp[loc] = value;
+
       this.setState({ preview: temp });
     });
 
-    notesUpdate(this.props.socket, (loc, type) => {
+    notesUpdate(this.props.socket, (loc, type, value) => {
       let temp = this.state.notes.slice();
-      temp[loc] = temp[loc] === type ? 0 : type;
+      if (temp[loc] === type) {
+        temp[loc] = value;
+      } else {
+        temp[loc] = value ? value : temp[loc];
+      }
       this.setState({ notes: temp });
     });
 
@@ -93,7 +98,6 @@ export default class Game extends React.Component {
 
     if (click === 0) {
       // click is a cell click; send to preview
-      previewClick(this.props.socket, i);
 
       let temp = this.state.preview;
       if (updateValue) {
@@ -110,26 +114,30 @@ export default class Game extends React.Component {
           mouseClicked: mouseStatus
         });
       }
+      previewClick(this.props.socket, { loc: i, value: temp[i] });
     } else {
       // click is a note click; send to notes
-      updateNotes(this.props.socket, { loc: i, type: click });
 
       let temp = this.state.notes.slice();
       if (updateValue) {
         temp[i] = temp[i] === click ? 0 : click;
-
         this.setState({
           notes: temp,
           mouseClicked: mouseStatus,
           mouseValue: temp[i]
         });
       } else {
-        temp[i] = this.state.mouseValue;
+        if (temp[i] === click) {
+          temp[i] = this.state.mouseValue;
+        } else {
+          temp[i] = this.state.mouseValue ? this.state.mouseValue : temp[i];
+        }
         this.setState({
           notes: temp,
           mouseClicked: mouseStatus
         });
       }
+      updateNotes(this.props.socket, { loc: i, type: click, value: temp[i] });
     }
   }
 
