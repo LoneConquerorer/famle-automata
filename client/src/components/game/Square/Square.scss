@@ -1,6 +1,12 @@
-$preview: rgba(0, 204, 255, 0.698);
+$preview: rgb(145, 229, 250);
 $cell: rgb(0, 204, 255);
-$note: rgba(255, 0, 0, 0.719);
+$push: rgb(0, 204, 255);
+$synth: rgb(255, 251, 0);
+$amsynth: rgb(255, 115, 0);
+$fmsynth: rgba(5, 163, 52, 0.931);
+$mono: #7746ff;
+$duo: rgb(247, 0, 255);
+$kick: rgba(255, 0, 0, 0.897);
 
 .preview {
   background-color: $preview;
@@ -8,21 +14,97 @@ $note: rgba(255, 0, 0, 0.719);
 .cell {
   background-color: $cell;
 }
-.note {
-  background-color: $note;
+.synth {
+  background-color: $synth;
 }
+.amsynth {
+  background-color: $amsynth;
+}
+.fmsynth {
+  background-color: $fmsynth;
+}
+.mono {
+  background-color: $mono;
+}
+.duo {
+  background-color: $duo;
+}
+.kick {
+  background-color: $kick;
+}
+
 .preview.cell {
   background-color: mix($preview, $cell);
 }
 
-.preview.note {
-  background-color: mix($preview, $note);
+.preview.synth {
+  background-color: mix($preview, $synth);
 }
 
-.cell.note {
-  background-color: mix($note, $cell);
+.cell.synth {
+  background-color: mix($synth, $cell);
 }
 
-.preview.cell.note {
-  background-color: mix(mix($note, $cell), $preview);
+.preview.amsynth {
+  background-color: mix($preview, $amsynth);
+}
+
+.cell.amsynth {
+  background-color: mix($amsynth, $cell);
+}
+
+.preview.fmsynth {
+  background-color: mix($preview, $fmsynth);
+}
+
+.cell.fmsynth {
+  background-color: mix($fmsynth, $cell);
+}
+
+.preview.mono {
+  background-color: mix($preview, $mono);
+}
+
+.cell.mono {
+  background-color: mix($mono, $cell);
+}
+
+.preview.duo {
+  background-color: mix($preview, $duo);
+}
+
+.cell.duo {
+  background-color: mix($duo, $cell);
+}
+
+.preview.kick {
+  background-color: mix($preview, $kick);
+}
+
+.cell.kick {
+  background-color: mix($kick, $cell);
+}
+
+.preview.cell.synth {
+  background-color: mix(mix($preview, $cell), $synth);
+}
+
+.preview.cell.amsynth {
+  background-color: mix(mix($preview, $cell), $amsynth);
+}
+
+.preview.cell.synth {
+  background-color: mix(mix($preview, $cell), $fmsynth);
+}
+
+.preview.cell.synth {
+  background-color: mix(mix($preview, $cell), $mono);
+}
+
+.preview.cell.synth {
+  background-color: mix(mix($preview, $cell), $duo);
+}
+
+.preview.cell.synth {
+  background-color: mix(mix($preview, $cell), $kick);
 }

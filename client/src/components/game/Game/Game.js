@@ -1,8 +1,7 @@
 import React from "react";
+import Tone from "tone";
 import Board from "../Board/Board.js";
 import {
-  subscribeToTimer,
-  changeTempo,
   initBoard,
   previewClick,
   updateNotes,
@@ -15,6 +14,8 @@ import {
 export default class Game extends React.Component {
   constructor(props) {
     super(props);
+    Tone.Transport.start();
+    Tone.Master.volume.value = -30;
 
     initBoard(this.props.socket, ({ preview, cells, notes }) =>
       this.setState({ preview, cells, notes })
@@ -59,6 +60,9 @@ export default class Game extends React.Component {
       preview: Array(this.props.rows * this.props.cols).fill(0),
       cells: Array(this.props.rows * this.props.cols).fill(0),
       notes: Array(this.props.rows * this.props.cols).fill(0),
+      sounds: new Map(), // maps location to type
+      octaves: Math.ceil(this.props.rows / 7),
+      pitches: ["C", "D", "E", "F", "G", "A", "B"],
       timestamp: 0
     };
   }
@@ -81,48 +85,72 @@ export default class Game extends React.Component {
       temp[i] = temp[i] === click ? 0 : click;
       this.setState({ notes: temp });
     }
-
-    // const history = this.state.history.slice(0, this.state.stepNumber + 1);
-    // const current = history[history.length - 1];
-    // const squares = current.squares.slice();
-    // if (calculateWinner(squares) || squares[i]) {
-    //   return;
-    // }
-    // squares[i] = this.state.xIsNext ? "X" : "O";
-    // this.setState({
-    //   history: history.concat([{ squares: squares }]),
-    //   xIsNext: !this.state.xIsNext,
-    //   stepNumber: history.length
-    // });
   }
 
-  jumpTo(step) {
-    this.setState({
-      stepNumber: step,
-      xIsNext: step % 2 === 0
-    });
+  playNote(i, type) {
+    if (Tone.Transport.state !== "started") {
+      Tone.Transport.start();
+      return;
+    }
+    if (Tone.context.state !== "running") {
+      Tone.context.resume();
+    }
+    if (Tone.Transport.seconds < 1) return;
+
+    const row = Math.floor(i / this.state.cols);
+    const invert = this.state.rows - row - 1; // used for scale going up
+    const octave = Math.floor(invert / this.state.pitches.length);
+    const pitch = invert % this.state.pitches.length;
+    console.log(this.state.pitches.length);
+    console.log(i, row, invert, octave, pitch);
+    let note = "";
+    let duration = "";
+    var inst = "";
+    switch (type) {
+      case 1: // synth
+        inst = new Tone.Synth().toMaster();
+        note = this.state.pitches[pitch] + (octave + 2).toString();
+        duration = "4n";
+        break;
+      case 2: // AMsynth
+        inst = new Tone.AMSynth().toMaster();
+        note = this.state.pitches[pitch] + (octave + 2).toString();
+        duration = "4n";
+        break;
+      case 3: // FMsynth
+        inst = new Tone.FMSynth().toMaster();
+        note = this.state.pitches[pitch] + (octave + 2).toString();
+        duration = "4n";
+        break;
+      // case 4: // MonoSynth
+      //   inst = new Tone.MonoSynth().toMaster();
+      //   note = this.state.pitches[pitch] + (octave + 2).toString();
+      //   duration = "4n";
+      //   break;
+      case 5: // DuoSynth
+        inst = new Tone.DuoSynth().toMaster();
+        note = this.state.pitches[pitch] + (octave + 2).toString();
+        duration = "4n";
+        break;
+      case 6: // Bass/Kick
+        inst = new Tone.MembraneSynth().toMaster();
+        note = this.state.pitches[pitch] + octave.toString();
+        duration = "1n";
+        break;
+      default:
+        break;
+    }
+    if (note !== "" && duration !== "" && inst !== "") {
+      console.log(note, duration);
+      inst.triggerAttackRelease(note, duration);
+    }
   }
 
   render() {
-    // const history = this.state.history;
-    // const current = history[this.state.stepNumber];
-    // const winner = calculateWinner(current.squares);
+    if (this.props.tempo !== Tone.Transport.bpm) {
+      Tone.Transport.bpm.value = this.props.tempo;
+    }
 
-    // const moves = history.map((step, move) => {
-    //   const desc = move ? "Go to move #" + move : "Go to game start";
-    //   return (
-    //     <li key={move}>
-    //       <button onClick={() => this.jumpTo(move)}>{desc}</button>
-    //     </li>
-    //   );
-    // });
-
-    // let status;
-    // if (winner) {
-    //   status = "Winner: " + winner;
-    // } else {
-    //   status = "Next player: " + (this.state.xIsNext ? "X" : "O");
-    // }
     return (
       <div className="game">
         <div className="game-board-container">
@@ -131,20 +159,11 @@ export default class Game extends React.Component {
             cells={this.state.cells}
             notes={this.state.notes}
             onClick={i => this.handleClick(i)}
+            playNote={(i, type) => this.playNote(i, type)}
             rows={this.state.rows}
             cols={this.state.cols}
           />
         </div>
-        {/* <div className="game-info">
-          <button onClick={() => changeTempo(this.state.socket)}>
-            change tempo to 120
-          </button>
-          <div>{status}</div>
-          <ol>{moves}</ol>
-        </div>
-        <p className="App-intro">
-          This is the timer value: {this.state.timestamp}
-        </p> */}
       </div>
     );
   }

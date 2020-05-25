@@ -10,6 +10,7 @@ export default class Board extends React.Component {
         preview={this.props.preview[i]}
         note={this.props.notes[i]}
         onClick={() => this.props.onClick(i)}
+        playNote={type => this.props.playNote(i, type)}
       />
     );
   }

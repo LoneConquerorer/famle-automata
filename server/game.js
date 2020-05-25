@@ -1,4 +1,4 @@
-const rows = 30;
+const rows = 28;
 const cols = 50;
 var preview = new Map();
 var temp = Array();

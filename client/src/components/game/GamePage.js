@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from "react";
 import queryString from "query-string";
+import StartAudioContext from "startaudiocontext";
+import Tone from "tone";
 import io from "socket.io-client";
+
 import "./Chat.css";
 import Game from "./Game/Game.js";
 import Input from "../input/Input.js";
@@ -12,7 +15,6 @@ let socket = io(ENDPOINT);
 const GamePage = ({ location }) => {
   const [name, setName] = useState("");
   const [message, setMessage] = useState("");
-  const [time, setTime] = useState("0");
   const [tempo, setTempo] = useState("0");
   const [click, setClick] = useState(0);
   const [messages, setMessages] = useState([]);
@@ -65,7 +67,13 @@ const GamePage = ({ location }) => {
   return (
     <div className="outerContainer">
       <div className="left-container">
-        <Game rows={30} cols={50} socket={socket} clickType={click} />
+        <Game
+          rows={28}
+          cols={50}
+          socket={socket}
+          clickType={click}
+          tempo={tempo}
+        />
       </div>
       <div className="right-container">
         <div className="right-top-container">
@@ -78,7 +86,13 @@ const GamePage = ({ location }) => {
         </div>
         <div className="right-bottom-container">
           <div>
-            <div className="sentText">Time:{time}</div>
+            <div className="sentText">Time:{0}</div>
+            <button
+              className="preview"
+              onClick={event => StartAudioContext(Tone.context)}
+            >
+              Start Sound
+            </button>
             <Input
               message={tempo}
               setMessage={setTempo}
@@ -86,7 +100,7 @@ const GamePage = ({ location }) => {
             />
           </div>
           <div>
-            <button className="cell" onClick={event => setClick(0)}>
+            <button className="preview" onClick={event => setClick(0)}>
               cells
             </button>
             <button className="push" onClick={event => pushPreview()}>
@@ -94,8 +108,23 @@ const GamePage = ({ location }) => {
             </button>
           </div>
           <div>
-            <button className="cell" onClick={event => setClick(1)}>
-              notes
+            <button className="synth" onClick={event => setClick(1)}>
+              Synth
+            </button>
+            <button className="amsynth" onClick={event => setClick(2)}>
+              AMSynth
+            </button>
+            <button className="fmsynth" onClick={event => setClick(3)}>
+              FMSynth
+            </button>
+            {/* <button className="mono" onClick={event => setClick(4)}>
+              MonoSynth
+            </button> */}
+            <button className="duo" onClick={event => setClick(5)}>
+              DuoSynth
+            </button>
+            <button className="kick" onClick={event => setClick(6)}>
+              Bass/Kick
             </button>
           </div>
         </div>
