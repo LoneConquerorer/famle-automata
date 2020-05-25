@@ -10,7 +10,7 @@ import Input from "../input/Input.js";
 import Messages from "../messages/Messages.js";
 import Tempo from "../tempo/Tempo.js";
 
-const ENDPOINT = "localhost:5000";
+const ENDPOINT = "https://famle-automata.herokuapp.com/";
 let socket = io(ENDPOINT);
 
 const GamePage = ({ location }) => {
