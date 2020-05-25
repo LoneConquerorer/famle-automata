@@ -8,6 +8,7 @@ import "./Chat.css";
 import Game from "./Game/Game.js";
 import Input from "../input/Input.js";
 import Messages from "../messages/Messages.js";
+import Tempo from "../tempo/Tempo.js";
 
 const ENDPOINT = "localhost:5000";
 let socket = io(ENDPOINT);
@@ -86,46 +87,77 @@ const GamePage = ({ location }) => {
         </div>
         <div className="right-bottom-container">
           <div>
-            <div className="sentText">Time:{0}</div>
             <button
-              className="preview"
+              className="preview "
               onClick={event => StartAudioContext(Tone.context)}
             >
               Start Sound
             </button>
-            <Input
-              message={tempo}
-              setMessage={setTempo}
-              sendMessage={sendTempo}
-            />
+          </div>
+          <div className="tempo-text">Tempo</div>
+          <div className="tempo-align">
+            <Tempo tempo={tempo} setTempo={setTempo} sendTempo={sendTempo} />
           </div>
           <div>
-            <button className="preview" onClick={event => setClick(0)}>
+            <button
+              className="preview cell-button"
+              onClick={event => setClick(0)}
+            >
               cells
             </button>
-            <button className="push" onClick={event => pushPreview()}>
+            <button
+              className="cell push-button"
+              onClick={event => pushPreview()}
+            >
               push changes
             </button>
           </div>
-          <div>
-            <button className="synth" onClick={event => setClick(1)}>
-              Synth
-            </button>
-            <button className="amsynth" onClick={event => setClick(2)}>
-              AMSynth
-            </button>
-            <button className="fmsynth" onClick={event => setClick(3)}>
-              FMSynth
-            </button>
-            {/* <button className="mono" onClick={event => setClick(4)}>
+          <div className="button-layers">
+            <div>
+              <button
+                className="synth-button note-button"
+                onClick={event => setClick(1)}
+              >
+                Synth
+              </button>
+            </div>
+            <div>
+              <button
+                className="amsynth-button note-button"
+                onClick={event => setClick(2)}
+              >
+                AMSynth
+              </button>
+            </div>
+            <div>
+              <button
+                className="fmsynth-button note-button"
+                onClick={event => setClick(3)}
+              >
+                FMSynth
+              </button>
+            </div>
+            <div>
+              {/* <button className="mono" onClick={event => setClick(4)}>
               MonoSynth
             </button> */}
-            <button className="duo" onClick={event => setClick(5)}>
-              DuoSynth
-            </button>
-            <button className="kick" onClick={event => setClick(6)}>
-              Bass/Kick
-            </button>
+            </div>
+            <div>
+              <button
+                className="duo-button note-button"
+                onClick={event => setClick(5)}
+              >
+                DuoSynth
+              </button>
+            </div>
+            <div>
+              <button
+                className="kick-button note-button"
+                onClick={event => setClick(6)}
+              >
+                Bass/Kick
+              </button>
+            </div>
           </div>
         </div>
       </div>

@@ -21,6 +21,13 @@
   height: 60%;
   max-height: 60%;
 }
+.right-bottom-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  height: 40%;
+  max-height: 40%;
+}
 
 .left-container {
   display: flex;
@@ -33,6 +40,124 @@
   border-color: white;
   border-style: solid;
   align-content: center;
+}
+
+.button-layers {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+.cell-button {
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+  color: #000 !important;
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: 3%;
+  display: inline-block;
+  border: none;
+  width: 50%;
+  align-content: center;
+  background-color: rgb(145, 229, 250);
+}
+.cell-button:hover {
+  background-color: rgb(122, 227, 253);
+}
+.cell-button:active {
+  background-color: rgb(78, 220, 255);
+}
+
+.push-button {
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+  color: #000 !important;
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: 3%;
+  display: inline-block;
+  border: none;
+  width: 50%;
+  align-content: center;
+  background-color: rgb(0, 204, 255);
+}
+.push-button:hover {
+  background-color: rgba(0, 204, 255, 0.911);
+}
+.push-button:active {
+  background-color: rgba(0, 204, 255, 0.76);
+}
+
+.note-button {
+  border-radius: 10px;
+  color: #000 !important;
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: 3%;
+  display: inline-block;
+  border: none;
+  width: 100%;
+  align-content: center;
+}
+
+.synth-button {
+  background-color: rgb(255, 251, 0);
+}
+.synth-button:hover {
+  background-color: rgba(255, 251, 0, 0.863);
+}
+.synth-button:active {
+  background-color: rgba(255, 251, 0, 0.671);
+}
+
+.amsynth-button {
+  background-color: rgb(255, 115, 0);
+}
+.amsynth-button:hover {
+  background-color: rgba(255, 115, 0, 0.829);
+}
+.amsynth-button:active {
+  background-color: rgba(255, 115, 0, 0.719);
+}
+
+.fmsynth-button {
+  background-color: rgb(0, 214, 64);
+}
+.fmsynth-button:hover {
+  background-color: rgba(0, 214, 64, 0.808);
+}
+.fmsynth-button:active {
+  background-color: rgba(0, 214, 64, 0.657);
+}
+
+.mono-button {
+  background-color: #7746ff;
+}
+.mono-button:hover {
+  background-color: #662fff;
+}
+.mono-button:active {
+  background-color: #4d0cff;
+}
+
+.duo-button {
+  background-color: rgb(247, 0, 255);
+}
+.duo-button:hover {
+  background-color: rgba(247, 0, 255, 0.87);
+}
+.duo-button:active {
+  background-color: rgba(247, 0, 255, 0.747);
+}
+
+.kick-button {
+  background-color: rgba(255, 0, 0, 0.897);
+}
+.kick-button:hover {
+  background-color: rgba(255, 0, 0, 0.787);
+}
+.kick-button:active {
+  background-color: rgba(255, 0, 0, 0.698);
 }
 
 @media (min-width: 320px) and (max-width: 480px) {

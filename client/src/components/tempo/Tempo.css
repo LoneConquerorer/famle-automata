@@ -1,0 +1,51 @@
+.tempo-form {
+  display: flex;
+  background: rgba(255, 255, 255, 0);
+  border-radius: 10px;
+}
+
+.tempo-text {
+  border-left-width: 2px;
+  border: 0px;
+  border-radius: 10px;
+  padding: 10px;
+  width: 40%;
+  font-size: 1.2em;
+}
+
+.tempo {
+  border-left-width: 2px;
+  border: 0px;
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+  padding: 10px;
+  width: 50%;
+  font-size: 1.2em;
+}
+
+tempo:focus,
+textarea:focus,
+select:focus {
+  outline: none;
+}
+
+.tempoButton {
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+  color: #fff !important;
+  text-transform: uppercase;
+  text-decoration: none;
+  background: #0026ff;
+  padding: 2%;
+  display: inline-block;
+  border: none;
+  width: 50%;
+  align-content: center;
+}
+.tempoButton:hover {
+  background: #183bff;
+}
+
+.tempoButton:active {
+  background: #3150ff;
+}
