@@ -152,8 +152,8 @@ export default class Game extends React.Component {
     // if (this.props.tempo !== Tone.Transport.bpm) {
     //   Tone.Transport.bpm.value = this.props.tempo;
     // }
-
     const row = Math.floor(i / this.state.cols);
+    const col = i % this.state.cols;
     const invert = this.state.rows - row - 1; // used for scale going up
     const octave = Math.floor(invert / this.state.pitches.length);
     const pitch = invert % this.state.pitches.length;
@@ -162,19 +162,22 @@ export default class Game extends React.Component {
     let note = "";
     let duration = "4n";
     var inst = "";
+    const panVol = new Tone.PanVol();
+    panVol.pan.value = col * (2 / (this.state.cols - 1)) - 1;
+
     switch (type) {
       case 1: // synth
-        inst = new Tone.Synth().toMaster();
+        inst = new Tone.Synth();
         note = this.state.pitches[pitch] + (octave + 2).toString();
         duration = "4n";
         break;
       case 2: // AMsynth
-        inst = new Tone.AMSynth().toMaster();
+        inst = new Tone.AMSynth();
         note = this.state.pitches[pitch] + (octave + 2).toString();
         duration = "4n";
         break;
       case 3: // FMsynth
-        inst = new Tone.FMSynth().toMaster();
+        inst = new Tone.FMSynth();
         note = this.state.pitches[pitch] + (octave + 2).toString();
         duration = "4n";
         break;
@@ -184,20 +187,22 @@ export default class Game extends React.Component {
       //   duration = "4n";
       //   break;
       case 5: // DuoSynth
-        inst = new Tone.DuoSynth().toMaster();
+        inst = new Tone.DuoSynth();
         note = this.state.pitches[pitch] + (octave + 2).toString();
         duration = "4n";
         break;
       case 6: // Bass/Kick
-        inst = new Tone.MembraneSynth().toMaster();
+        inst = new Tone.MembraneSynth();
         note = this.state.pitches[pitch] + octave.toString();
         duration = "1n";
         break;
       default:
         break;
     }
+
     if (note !== "" && duration !== "" && inst !== "") {
       // console.log(note, duration);
+      inst.chain(panVol, Tone.Master);
       inst.triggerAttackRelease(note, duration);
     }
   }

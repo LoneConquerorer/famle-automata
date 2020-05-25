@@ -46,7 +46,7 @@ export default class Square extends React.Component {
   }
 
   render() {
-    if (this.props.note && this.props.cell) {
+    if (this.props.note && this.props.cell && !this.props.preview) {
       this.props.playNote(this.props.note);
     }
     return <div className="squareContainer">{this.renderColor()}</div>;
