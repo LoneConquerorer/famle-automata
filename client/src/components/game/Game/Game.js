@@ -5,6 +5,7 @@ import {
   initBoard,
   previewClick,
   updateNotes,
+  tempoUpdate,
   previewUpdate,
   notesUpdate,
   cellsUpdate,
@@ -20,6 +21,10 @@ export default class Game extends React.Component {
     initBoard(this.props.socket, ({ preview, cells, notes }) =>
       this.setState({ preview, cells, notes })
     );
+
+    tempoUpdate(this.props.socket, t => {
+      Tone.Transport.bpm.value = t;
+    });
 
     previewUpdate(this.props.socket, loc => {
       let temp = this.state.preview.slice();
@@ -63,11 +68,13 @@ export default class Game extends React.Component {
       sounds: new Map(), // maps location to type
       octaves: Math.ceil(this.props.rows / 7),
       pitches: ["C", "D", "E", "F", "G", "A", "B"],
+      mouseClicked: false,
+      mouseValue: null,
       timestamp: 0
     };
   }
 
-  handleClick(i) {
+  handleToggle(i, mouseStatus, updateValue) {
     const click = this.props.clickType;
 
     if (click === 0) {
@@ -75,16 +82,64 @@ export default class Game extends React.Component {
       previewClick(this.props.socket, i);
 
       let temp = this.state.preview;
-      temp[i] = temp[i] ? 0 : 1;
-      this.setState({ preview: temp });
+      if (updateValue) {
+        temp[i] = temp[i] ? 0 : 1;
+        this.setState({
+          preview: temp,
+          mouseClicked: mouseStatus,
+          mouseValue: temp[i]
+        });
+      } else {
+        temp[i] = this.state.mouseValue;
+        this.setState({
+          preview: temp,
+          mouseClicked: mouseStatus
+        });
+      }
     } else {
       // click is a note click; send to notes
       updateNotes(this.props.socket, { loc: i, type: click });
 
       let temp = this.state.notes.slice();
       temp[i] = temp[i] === click ? 0 : click;
-      this.setState({ notes: temp });
+      if (updateValue) {
+        temp[i] = temp[i] === click ? 0 : click;
+
+        this.setState({
+          notes: temp,
+          mouseClicked: mouseStatus,
+          mouseValue: temp[i]
+        });
+      } else {
+        temp[i] = this.state.mouseValue;
+
+        this.setState({
+          notes: temp,
+          mouseClicked: mouseStatus
+        });
+      }
     }
+  }
+
+  handleClick(i) {
+    this.handleToggle(i, false, false);
+  }
+
+  handleMouseDown(i) {
+    this.handleToggle(i, true, true);
+    // console.log(this.state.mouseClicked);
+  }
+
+  handleMouseEnter(i) {
+    if (this.state.mouseClicked) {
+      this.handleToggle(i, true, false);
+    }
+    // console.log(this.state.mouseClicked);
+  }
+
+  handleMouseUpContext() {
+    this.setState({ mouseClicked: false, mouseValue: null });
+    // console.log(this.state.mouseClicked);
   }
 
   playNote(i, type) {
@@ -95,16 +150,19 @@ export default class Game extends React.Component {
     if (Tone.context.state !== "running") {
       Tone.context.resume();
     }
-    if (Tone.Transport.seconds < 1) return;
+    if (Tone.Transport.seconds < 2) return;
+    // if (this.props.tempo !== Tone.Transport.bpm) {
+    //   Tone.Transport.bpm.value = this.props.tempo;
+    // }
 
     const row = Math.floor(i / this.state.cols);
     const invert = this.state.rows - row - 1; // used for scale going up
     const octave = Math.floor(invert / this.state.pitches.length);
     const pitch = invert % this.state.pitches.length;
-    console.log(this.state.pitches.length);
-    console.log(i, row, invert, octave, pitch);
+    // console.log(this.state.pitches.length);
+    // console.log(i, row, invert, octave, pitch);
     let note = "";
-    let duration = "";
+    let duration = "4n";
     var inst = "";
     switch (type) {
       case 1: // synth
@@ -141,16 +199,12 @@ export default class Game extends React.Component {
         break;
     }
     if (note !== "" && duration !== "" && inst !== "") {
-      console.log(note, duration);
+      // console.log(note, duration);
       inst.triggerAttackRelease(note, duration);
     }
   }
 
   render() {
-    if (this.props.tempo !== Tone.Transport.bpm) {
-      Tone.Transport.bpm.value = this.props.tempo;
-    }
-
     return (
       <div className="game">
         <div className="game-board-container">
@@ -159,6 +213,9 @@ export default class Game extends React.Component {
             cells={this.state.cells}
             notes={this.state.notes}
             onClick={i => this.handleClick(i)}
+            mouseDown={i => this.handleMouseDown(i)}
+            mouseEnter={i => this.handleMouseEnter(i)}
+            mouseUpContext={() => this.handleMouseUpContext()}
             playNote={(i, type) => this.playNote(i, type)}
             rows={this.state.rows}
             cols={this.state.cols}

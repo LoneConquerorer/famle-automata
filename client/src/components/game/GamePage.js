@@ -56,8 +56,9 @@ const GamePage = ({ location }) => {
 
   const sendTempo = event => {
     event.preventDefault();
+
     if (tempo) {
-      socket.emit("tempoChange", tempo, () => setTempo(tempo));
+      socket.emit("tempoChange", tempo);
     }
   };
 
@@ -68,13 +69,7 @@ const GamePage = ({ location }) => {
   return (
     <div className="outerContainer">
       <div className="left-container">
-        <Game
-          rows={28}
-          cols={50}
-          socket={socket}
-          clickType={click}
-          tempo={tempo}
-        />
+        <Game rows={28} cols={50} socket={socket} clickType={click} />
       </div>
       <div className="right-container">
         <div className="right-top-container">

@@ -79,9 +79,10 @@ io.on("connection", socket => {
 
   socket.on("tempoChange", t => {
     console.log("client changed tempo to ", t);
-    tempo = parseInt(t);
+    tempo = Math.max(30, parseInt(t));
+    tempo = Math.min(tempo, 720);
     time = 0;
-    socket.broadcast.emit("tempo", tempo);
+    io.emit("tempo", tempo);
   });
 
   socket.on("previewClick", ({ loc }) => {

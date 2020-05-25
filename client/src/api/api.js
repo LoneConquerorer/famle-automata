@@ -20,6 +20,11 @@ export function updateNotes(socket, { loc, type }) {
 }
 
 // gets preview updates
+export function tempoUpdate(socket, cb) {
+  socket.on("tempo", t => cb(t));
+}
+
+// gets preview updates
 export function previewUpdate(socket, cb) {
   socket.on("previewUpdate", ({ loc }) => cb(loc));
 }

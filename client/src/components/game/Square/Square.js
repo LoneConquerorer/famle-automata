@@ -22,7 +22,16 @@ export default class Square extends React.Component {
     if (this.props.cell) c += "cell ";
     if (this.props.note) c += this.state.instruments[this.props.note];
 
-    return <button className={c} onClick={this.props.onClick}></button>;
+    return (
+      <button
+        className={c}
+        onClick={this.props.onClick}
+        onMouseDown={this.props.mouseDown}
+        onMouseEnter={this.props.mouseEnter}
+        onMouseUp={this.props.mouseUpContext}
+        onContextMenu={this.props.mouseUpContext}
+      ></button>
+    );
   }
 
   shouldComponentUpdate(nextProps, nextState) {
@@ -33,17 +42,8 @@ export default class Square extends React.Component {
     } else if (nextProps.note !== this.props.note) {
       return true;
     }
-    // else if (this.props.note && this.props.cell) {
-    //   return true;
-    // }
     return false;
   }
-
-  // componentDidUpdate() {
-  // if (this.props.note && this.props.cell) {
-  //   this.props.playNote(this.props.note);
-  // }
-  // }
 
   render() {
     if (this.props.note && this.props.cell) {

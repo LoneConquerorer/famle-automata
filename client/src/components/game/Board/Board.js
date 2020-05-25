@@ -9,7 +9,10 @@ export default class Board extends React.Component {
         cell={this.props.cells[i]}
         preview={this.props.preview[i]}
         note={this.props.notes[i]}
-        onClick={() => this.props.onClick(i)}
+        // onClick={() => this.props.onClick(i)}
+        mouseDown={() => this.props.mouseDown(i)}
+        mouseEnter={() => this.props.mouseEnter(i)}
+        mouseUpContext={() => this.props.mouseUpContext()}
         playNote={type => this.props.playNote(i, type)}
       />
     );
