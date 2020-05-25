@@ -1,6 +1,7 @@
 const express = require("express");
 const socketio = require("socket.io");
 const http = require("http");
+const cors = require("cors");
 
 const { addUser, removeUser, getUser } = require("./users.js");
 
@@ -23,6 +24,9 @@ const router = require("./router");
 const app = express();
 const server = http.createServer(app);
 const io = socketio(server);
+
+app.use(router);
+app.use(cors());
 
 var tempo = 240;
 var time = 0;

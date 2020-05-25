@@ -50,6 +50,12 @@ body {
   border: none;
   width: 100%;
 }
+.button:hover {
+  background: #146aff;
+}
+.button:active {
+  background: #2172fd;
+}
 
 .mt-20 {
   margin-top: 20px;
