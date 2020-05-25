@@ -101,7 +101,6 @@ export default class Game extends React.Component {
       updateNotes(this.props.socket, { loc: i, type: click });
 
       let temp = this.state.notes.slice();
-      temp[i] = temp[i] === click ? 0 : click;
       if (updateValue) {
         temp[i] = temp[i] === click ? 0 : click;
 
@@ -112,7 +111,6 @@ export default class Game extends React.Component {
         });
       } else {
         temp[i] = this.state.mouseValue;
-
         this.setState({
           notes: temp,
           mouseClicked: mouseStatus
