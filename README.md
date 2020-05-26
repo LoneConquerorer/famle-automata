@@ -1,4 +1,4 @@
-### FaMLE;Automata
+# FaMLE;Automata
 
 A multiplayer musical application of Conway's game of Life, a webapp created as a new take on sequencers. Composed for the MIT Laptop Ensemble.
 
@@ -23,13 +23,13 @@ For notes, they are placed upon clicking.
 
 ## Other details
 
-# Known Known:
+### Known Known:
 
 - Works in the Chrome browser (mine at least)
 
 - Developed with React.js, Node.js, and Tone.js
 
-# Known Unknown (bugs):
+### Known Unknown (bugs):
 
 - When a lot of notes are being played each timestep, the audio may distort and cut out temporarily. If this persists, try clicking the starting audio button on the bottom right (multiple times if necessary). It might also be wise to clear the notes if there are just too many.
 
@@ -37,11 +37,11 @@ For notes, they are placed upon clicking.
 
 - Some sounds may be EQ'ed a bit wonk. Especially the bighter synths.
 
-# Unknown Known (I guess it just works):
+### Unknown Known (I guess it just works):
 
 - ¯\_(ツ)\_/¯
 
-# Unknown Unknown ():
+### Unknown Unknown ():
 
 - ¯\_(ツ)\_/¯
 
