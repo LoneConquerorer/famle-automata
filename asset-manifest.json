@@ -1,22 +1,22 @@
 {
   "files": {
-    "main.css": "/FaMLE-Automata-Deloy/static/css/main.14418411.chunk.css",
-    "main.js": "/FaMLE-Automata-Deloy/static/js/main.3f00e92f.chunk.js",
-    "main.js.map": "/FaMLE-Automata-Deloy/static/js/main.3f00e92f.chunk.js.map",
-    "runtime-main.js": "/FaMLE-Automata-Deloy/static/js/runtime-main.d111d3c2.js",
-    "runtime-main.js.map": "/FaMLE-Automata-Deloy/static/js/runtime-main.d111d3c2.js.map",
-    "static/js/2.429d4431.chunk.js": "/FaMLE-Automata-Deloy/static/js/2.429d4431.chunk.js",
-    "static/js/2.429d4431.chunk.js.map": "/FaMLE-Automata-Deloy/static/js/2.429d4431.chunk.js.map",
-    "index.html": "/FaMLE-Automata-Deloy/index.html",
-    "precache-manifest.b505f10c9c4e7b1b1964b349be969e66.js": "/FaMLE-Automata-Deloy/precache-manifest.b505f10c9c4e7b1b1964b349be969e66.js",
-    "service-worker.js": "/FaMLE-Automata-Deloy/service-worker.js",
-    "static/css/main.14418411.chunk.css.map": "/FaMLE-Automata-Deloy/static/css/main.14418411.chunk.css.map",
-    "static/js/2.429d4431.chunk.js.LICENSE.txt": "/FaMLE-Automata-Deloy/static/js/2.429d4431.chunk.js.LICENSE.txt"
+    "main.css": "/famle-automata/static/css/main.14418411.chunk.css",
+    "main.js": "/famle-automata/static/js/main.dbf84c41.chunk.js",
+    "main.js.map": "/famle-automata/static/js/main.dbf84c41.chunk.js.map",
+    "runtime-main.js": "/famle-automata/static/js/runtime-main.dca306e0.js",
+    "runtime-main.js.map": "/famle-automata/static/js/runtime-main.dca306e0.js.map",
+    "static/js/2.86985a2d.chunk.js": "/famle-automata/static/js/2.86985a2d.chunk.js",
+    "static/js/2.86985a2d.chunk.js.map": "/famle-automata/static/js/2.86985a2d.chunk.js.map",
+    "index.html": "/famle-automata/index.html",
+    "precache-manifest.33ac06d9249adc4be40f57190f42b4ee.js": "/famle-automata/precache-manifest.33ac06d9249adc4be40f57190f42b4ee.js",
+    "service-worker.js": "/famle-automata/service-worker.js",
+    "static/css/main.14418411.chunk.css.map": "/famle-automata/static/css/main.14418411.chunk.css.map",
+    "static/js/2.86985a2d.chunk.js.LICENSE.txt": "/famle-automata/static/js/2.86985a2d.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
-    "static/js/runtime-main.d111d3c2.js",
-    "static/js/2.429d4431.chunk.js",
+    "static/js/runtime-main.dca306e0.js",
+    "static/js/2.86985a2d.chunk.js",
     "static/css/main.14418411.chunk.css",
-    "static/js/main.3f00e92f.chunk.js"
+    "static/js/main.dbf84c41.chunk.js"
   ]
 }
