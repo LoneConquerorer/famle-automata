@@ -3,7 +3,7 @@
 A multiplayer musical application of Conway's game of Life, a webapp created as a new take on sequencers. Composed for the MIT Laptop Ensemble.
 
 Check it out here: https://loneconquerorer.github.io/famle-automata/
-(assuming the server is up and running)
+
 
 ## How to play
 
