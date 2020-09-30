@@ -11,11 +11,11 @@ Check it out here: https://loneconquerorer.github.io/famle-automata/
 
 2. There is a chat on the top right to talk to and coordinate between players.
 
-3. There are two types of objects that can be placed: cells and notes. They can by applied by clicking/clicking and dragging.
+3. There are two types of objects that can be placed: cells and notes. They can by applied by selecting the type from the side, and then clicking/clicking and dragging on the grid to place them.
 
-For cells, after placing the desired pattern onto the board, they must be pushed to the server to begin evolution. They will evolve based on the tempo that is set for the game. The current rule is the classical Conway's Game of Life (B3/S23).
+For cells, after placing the desired pattern onto the board, they must be pushed to the server to begin evolution. This allows the player to design their cell placement before they start evolving. Once they are pushed to the server, they will evolve based on the tempo that is set for the game. The current rule is the classical Conway's Game of Life (B3/S23).
 
-For notes, they are placed upon clicking.
+For notes, they are placed upon clicking the grid.
 
 4. When a cell is born ontop of a note block, that note is played. The board is tuned to a C major scale, increasing vertically. The sound is panned horizontally. The instruments are from Tone.js.
 
@@ -39,10 +39,10 @@ For notes, they are placed upon clicking.
 
 ### Unknown Known (I guess it just works):
 
-- ¯\_(ツ)\_/¯
+- ¯\\_(ツ)\_/¯
 
 ### Unknown Unknown ():
 
-- ¯\_(ツ)\_/¯
+- ¯\\_(ツ)\_/¯
 
 Updated May 25th, 2020
